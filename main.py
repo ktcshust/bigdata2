@@ -21,4 +21,5 @@ collection_ref = db.collection('top_20_ratio')
 
 for record in data:
     collection_ref.add(record)
+#
 
