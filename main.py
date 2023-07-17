@@ -68,11 +68,11 @@ for record in data2:
 existing_names2 = set()
 docs5 = collection_ref2.stream()
 for doc in docs5:
-    existing_names2.add(doc.get('name'))
+    existing_names2.add(doc.get('country'))
 docs_to_delete = []
 for name in existing_names2:
-    if name not in [record['name'] for record in data2]:
-        query = collection_ref2.where('name', '==', name)
+    if name not in [record['country'] for record in data2]:
+        query = collection_ref2.where('country', '==', name)
         docs = query.stream()
         for doc in docs:
             docs_to_delete.append(doc.reference)
@@ -83,7 +83,7 @@ for doc_ref in docs_to_delete:
 
 # Thêm các tài liệu mới cho những 'record[name]' chưa tồn tại trong Firestore
 for record in data2:
-    if record['name'] not in existing_names2:
+    if record['country'] not in existing_names2:
         collection_ref2.add(record)
 
 df3 = pd.read_csv('top_20_category.csv')
@@ -106,11 +106,11 @@ for record in data3:
 existing_names3 = set()
 docs6 = collection_ref3.stream()
 for doc in docs6:
-    existing_names3.add(doc.get('name'))
+    existing_names3.add(doc.get('category'))
 docs_to_delete = []
 for name in existing_names3:
-    if name not in [record['name'] for record in data3]:
-        query = collection_ref3.where('name', '==', name)
+    if name not in [record['category'] for record in data3]:
+        query = collection_ref3.where('category', '==', name)
         docs = query.stream()
         for doc in docs:
             docs_to_delete.append(doc.reference)
@@ -121,6 +121,6 @@ for doc_ref in docs_to_delete:
 
 # Thêm các tài liệu mới cho những 'record[name]' chưa tồn tại trong Firestore
 for record in data3:
-    if record['name'] not in existing_names3:
+    if record['category'] not in existing_names3:
         collection_ref3.add(record)
 
